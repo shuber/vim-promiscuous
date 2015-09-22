@@ -7,10 +7,26 @@ Powerful **context switching** using git and vim sessions.
 
 Load `shuber/vim-promiscuous` using your favorite plugin manager e.g. [Vundle](https://github.com/VundleVim/Vundle.vim)
 
+
 ## Usage
 
 ```vim
 :Promiscuous [branch]
+```
+
+
+## Configuration
+
+These are the defaults. Feel free to override them.
+
+```vim
+let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
+```
+
+```vim
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
+set undolevels=1000
+set undoreload=10000
 ```
 
 
