@@ -22,15 +22,14 @@ function! Promiscuous(...)
       let l:branch = a:1
     endif
 
-    " call promiscuous#git#stash()
-    " call promiscuous#git#commit()
-    " call promiscuous#session#save()
-    " call promiscuous#branch#clean()
-    " call promiscuous#git#checkout(l:branch)
-    " call promiscuous#session#load()
-    " call promiscuous#git#commit_pop()
-    " call promiscuous#git#stash_pop()
-    call promiscuous#helpers#log(l:branch)
+    call promiscuous#git#stash()
+    call promiscuous#git#commit()
+    call promiscuous#session#save()
+    call promiscuous#branch#clean()
+    call promiscuous#git#checkout(l:branch)
+    call promiscuous#session#load()
+    call promiscuous#git#commit_pop()
+    call promiscuous#git#stash_pop()
 
     redraw!
   else
