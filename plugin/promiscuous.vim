@@ -30,9 +30,9 @@ function! Promiscuous(...)
     " call promiscuous#session#load()
     " call promiscuous#git#commit_pop()
     " call promiscuous#git#stash_pop()
+    call promiscuous#helpers#log(l:branch)
 
     redraw!
-    echom l:branch
   else
     call promiscuous#branch#search()
   endif
