@@ -3,7 +3,7 @@ function! promiscuous#helpers#dasherize(path)
 endfunction
 
 function! promiscuous#helpers#log(message)
-  echom g:promiscuous_prefix ' ' a:message
+  echom g:promiscuous_prefix a:message
 endfunction
 
 function! promiscuous#helpers#mkdir(dir)
