@@ -4,12 +4,52 @@ set undoreload=10000
 
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 
+command! -nargs=? Promiscuous :call Promiscuous(<f-args>)
+
+function! Promiscuous(...)
+  if a:0 > 0
+    if type(a:1) == type([])
+      let l:branch = a:1[-1]
+    else
+      let l:branch = a:1
+    endif
+
+    call promiscuous#session_save()
+
+    if promiscuous#git_checkout(l:branch)
+      exec 'bufdo bd'
+      call promiscuous#session_load()
+    endif
+
+    redraw!
+  else
+    call promiscuous#search()
+  endif
+endfunction
+
+function! promiscuous#git_checkout(unsanitized_branch)
+  let l:branch = substitute(a:unsanitized_branch, '^\s*\(.\{-}\)\s*$', '\1', '')
+  let l:checkout = 'git checkout '
+  let l:checkout_old = l:checkout . l:branch
+  let l:checkout_new = l:checkout . '-b ' . l:branch
+  let l:checkout_command = '!' . l:checkout_old . ' || ' . l:checkout_new
+  silent! exec l:checkout_command
+endfunction
+
 function! promiscuous#persist_undo(session_file)
   let l:undo_dir = promiscuous#helpers#dasherize(a:session_file)
   let l:undo_path = g:promiscuous_dir . '/' . l:undo_dir
   call promiscuous#helpers#mkdir(l:undo_path)
   let &undodir = l:undo_path
   set undofile
+endfunction
+
+function! promiscuous#search()
+  call fzf#run({
+  \ 'options': '--print-query',
+  \ 'sink*': function('Promiscuous'),
+  \ 'source': 'git branch -a'
+  \ })
 endfunction
 
 function! promiscuous#session_file()
