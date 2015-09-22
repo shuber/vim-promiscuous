@@ -21,6 +21,7 @@ These are the defaults. Feel free to override them.
 
 ```vim
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
+let g:promiscuous_prefix = '[Promiscuous]'
 ```
 
 ```vim
