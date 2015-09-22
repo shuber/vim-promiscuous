@@ -3,6 +3,7 @@ set undolevels=1000
 set undoreload=10000
 
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
+let g:promiscuous_prefix = '[Promiscuous]'
 
 command! -nargs=? Promiscuous :call Promiscuous(<f-args>)
 
@@ -14,17 +15,21 @@ function! Promiscuous(...)
       let l:branch = a:1
     endif
 
+    call promiscuous#git_commit()
     call promiscuous#session_save()
-
-    if promiscuous#git_checkout(l:branch)
-      exec 'bufdo bd'
-      call promiscuous#session_load()
-    endif
+    call promiscuous#clean()
+    call promiscuous#git_checkout(l:branch)
+    call promiscuous#session_load()
+    call promiscuous#git_commit_pop()
 
     redraw!
   else
     call promiscuous#search()
   endif
+endfunction
+
+function! promiscuous#clean()
+  silent! exec 'bufdo bd'
 endfunction
 
 function! promiscuous#git_checkout(unsanitized_branch)
@@ -34,6 +39,32 @@ function! promiscuous#git_checkout(unsanitized_branch)
   let l:checkout_new = l:checkout . '-b ' . l:branch
   let l:checkout_command = '!' . l:checkout_old . ' || ' . l:checkout_new
   silent! exec l:checkout_command
+endfunction
+
+function! contexticles#git_commit(...)
+  if a:0 > 0
+    let l:message = g:promiscuous_prefix . ' ' . a:1
+  else
+    let l:message = g:promiscuous_prefix
+  endif
+
+  let l:commit = '!git commit -am ' . shellescape(l:message)
+
+  silent! exec '!git add .'
+  silent! exec l:commit
+
+  call promiscuous#log('Commit: ' . l:message)
+endfunction
+
+function! contexticles#git_commit_pop()
+  let l:commit = systemlist('git log -1 --oneline')[0]
+  let l:escaped = substitute('[', '\[', g:promiscuous_prefix)
+  let l:regex = substitute(']', '\]', l:sanitized)
+
+  if l:commit =~ l:regex
+    silent! execute '!git reset --soft HEAD~1 && git reset'
+    call promiscuous#helpers#log('Commit pop: ' . l:commit)
+  endif
 endfunction
 
 function! promiscuous#persist_undo(session_file)
@@ -64,7 +95,7 @@ function! promiscuous#session_load()
   let l:session_file = promiscuous#session_file()
 
   if (filereadable(l:session_file))
-    exec 'source ' l:session_file
+    silent! exec 'source ' . l:session_file
   else
     call promiscuous#session_save()
   endif
@@ -76,7 +107,7 @@ function! promiscuous#session_save()
   let l:session_file = promiscuous#session_file()
   call promiscuous#helpers#mkdir(g:promiscuous_dir)
   call promiscuous#persist_undo(l:session_file)
-  exec 'mksession! ' . l:session_file
+  silent! exec 'mksession! ' . l:session_file
   call promiscuous#log('Saved session ' . l:session_file)
 endfunction
 
@@ -85,12 +116,12 @@ function! promiscuous#helpers#dasherize(path)
 endfunction
 
 function! promiscuous#helpers#log(message)
-  echom '[Promiscuous] ' a:message
+  echom g:promiscuous_prefix ' ' a:message
 endfunction
 
 function! promiscuous#helpers#mkdir(dir)
   if (filewritable(a:dir) != 2)
-    exec 'silent !mkdir -p ' a:dir
+    silent! exec '!mkdir -p ' . a:dir
     redraw!
   endif
 endfunction
