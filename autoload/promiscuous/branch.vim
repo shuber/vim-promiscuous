@@ -1,5 +1,6 @@
 function! promiscuous#branch#clean()
   silent! exec 'bufdo bd'
+  call promiscuous#helpers#log('Deleted buffers')
 endfunction
 
 function! promiscuous#branch#search()

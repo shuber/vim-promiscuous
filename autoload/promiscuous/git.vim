@@ -5,6 +5,7 @@ function! promiscuous#git#checkout(unsanitized_branch)
   let l:checkout_new = l:checkout . '-b ' . l:branch
   let l:checkout_command = '!' . l:checkout_old . ' || ' . l:checkout_new
   silent! exec l:checkout_command
+  call promiscuous#helpers#log('Checkout: ' . l:branch)
 endfunction
 
 function! promiscuous#git#commit(...)
