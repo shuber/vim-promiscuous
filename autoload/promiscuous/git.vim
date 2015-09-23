@@ -24,13 +24,13 @@ function! promiscuous#git#commit_pop()
 endfunction
 
 function! promiscuous#git#stash()
-  let l:stash = promiscuous#undo#name()
-  silent! exec '!git stash save ' . l:stash . ' && git stash apply'
+  let l:name = promiscuous#session#name()
+  silent! exec '!git stash save ' . l:name . ' && git stash apply'
   call promiscuous#helpers#log('Stash')
 endfunction
 
 function! promiscuous#git#stash_pop()
-  let l:name = promiscuous#undo#name()
+  let l:name = promiscuous#session#name()
   let l:stash = systemlist('git stash list | grep ' . l:name . ' | cut -d ":" -f1')
 
   if type(l:stash) == type([]) && len(l:stash) > 0
