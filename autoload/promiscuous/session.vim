@@ -15,7 +15,7 @@ function! promiscuous#session#load()
     call promiscuous#session#save()
   endif
 
-  call promiscuous#helpers#log('Loaded session ' l:session_file)
+  call promiscuous#helpers#log('Loaded session ' . l:session_file)
 endfunction
 
 function! promiscuous#session#save()
