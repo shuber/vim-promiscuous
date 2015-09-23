@@ -1,9 +1,6 @@
 function! promiscuous#session#file()
-  let l:git_branch = systemlist('git symbolic-ref --short HEAD')[0]
-  let l:session_name = getcwd() . '/' . l:git_branch
-  let l:session_path = promiscuous#helpers#dasherize(l:session_name) . '.vim'
-  let l:session_file = g:promiscuous_dir . '/' . l:session_path
-  return l:session_file
+  let l:session_name = promiscuous#session#name()
+  return g:promiscuous_dir . '/' . l:session_name . '.vim'
 endfunction
 
 function! promiscuous#session#load()
@@ -16,6 +13,12 @@ function! promiscuous#session#load()
   endif
 
   call promiscuous#helpers#log('Load: ' . l:session_file)
+endfunction
+
+function! promiscuous#session#name()
+  let l:git_branch = systemlist('git symbolic-ref --short HEAD')[0]
+  let l:session_name = getcwd() . '/' . l:git_branch
+  return promiscuous#helpers#dasherize(l:session_name)
 endfunction
 
 function! promiscuous#session#save()
