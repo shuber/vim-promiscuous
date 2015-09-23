@@ -20,7 +20,10 @@ Load `shuber/vim-promiscuous` using your favorite plugin manager e.g. [Vundle](h
 These are the defaults. Feel free to override them.
 
 ```vim
+" The directory to store all sessions and undo history
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
+
+" The prefix prepended to all commit, stash, and log messages
 let g:promiscuous_prefix = '[Promiscuous]'
 ```
 
