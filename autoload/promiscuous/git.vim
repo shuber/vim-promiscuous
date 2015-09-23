@@ -21,8 +21,8 @@ endfunction
 
 function! promiscuous#git#commit_pop()
   let l:commit = systemlist('git log -1 --oneline')[0]
-  let l:escaped = substitute('[', '\[', g:promiscuous_prefix)
-  let l:regex = substitute(']', '\]', l:escaped)
+  let l:escaped = substitute(g:promiscuous_prefix, '[', '\\[', '')
+  let l:regex = substitute(l:escaped, ']', '\\]', '')
 
   if l:commit =~ l:regex
     silent! execute '!git reset --soft HEAD~1 && git reset'
