@@ -37,4 +37,4 @@ function! Promiscuous(...)
   endif
 endfunction
 
-silent! call Promiscuous()
+silent! call promiscuous#session#save()
