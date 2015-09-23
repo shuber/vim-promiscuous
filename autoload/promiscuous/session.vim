@@ -15,7 +15,7 @@ function! promiscuous#session#load()
     call promiscuous#session#save()
   endif
 
-  call promiscuous#helpers#log('Load session ' . l:session_file)
+  call promiscuous#helpers#log('Load: ' . l:session_file)
 endfunction
 
 function! promiscuous#session#save()
@@ -23,5 +23,5 @@ function! promiscuous#session#save()
   call promiscuous#helpers#mkdir(g:promiscuous_dir)
   call promiscuous#undo#save()
   silent! exec 'mksession! ' . l:session_file
-  call promiscuous#helpers#log('Save session ' . l:session_file)
+  call promiscuous#helpers#log('Save: ' . l:session_file)
 endfunction
