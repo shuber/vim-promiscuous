@@ -8,26 +8,18 @@ function! promiscuous#git#checkout(unsanitized_branch)
   call promiscuous#helpers#log('Checkout: ' . l:branch)
 endfunction
 
-function! promiscuous#git#commit(...)
-  if a:0 > 0
-    let l:message = g:promiscuous_prefix . ' ' . a:1
-  else
-    let l:message = g:promiscuous_prefix
-  endif
-
-  let l:commit = '!git commit -am ' . shellescape(l:message)
+function! promiscuous#git#commit()
+  let l:commit = 'git commit -am ' . shellescape(g:promiscuous_prefix)
   silent! exec '!git add . && ' . l:commit
-  call promiscuous#helpers#log('Commit: ' . l:message)
+  call promiscuous#helpers#log('Commit')
 endfunction
 
 function! promiscuous#git#commit_pop()
   let l:commit = systemlist('git log -1 --oneline')[0]
-  let l:escaped = substitute(g:promiscuous_prefix, '[', '\\[', '')
-  let l:regex = substitute(l:escaped, ']', '\\]', '')
 
-  if l:commit =~ l:regex
+  if l:commit == g:promiscuous_prefix
     silent! execute '!git reset --soft HEAD~1 && git reset'
-    call promiscuous#helpers#log('Commit pop: ' . l:commit)
+    call promiscuous#helpers#log('Commit pop')
   endif
 endfunction
 
