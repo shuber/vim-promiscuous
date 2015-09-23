@@ -18,7 +18,7 @@ function! promiscuous#git#commit_pop()
   let l:commit = systemlist('git log -1 --pretty=format:%s')[0]
 
   if l:commit == g:promiscuous_prefix
-    silent! execute '!git reset --soft HEAD~1 && git reset'
+    silent! exec '!git reset --soft HEAD~1 && git reset'
     call promiscuous#helpers#log('Commit pop')
   endif
 endfunction
