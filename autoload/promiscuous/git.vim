@@ -26,7 +26,7 @@ endfunction
 function! promiscuous#git#stash()
   let l:stash = promiscuous#undo#name()
   silent! exec '!git stash save ' . l:stash . ' && git stash apply'
-  call promiscuous#helpers#log('Stash: ' . l:stash)
+  call promiscuous#helpers#log('Stash')
 endfunction
 
 function! promiscuous#git#stash_pop()
@@ -35,6 +35,6 @@ function! promiscuous#git#stash_pop()
 
   if type(l:stash) == type([]) && len(l:stash) > 0
     silent! exec '!git reset --hard && git stash pop --index ' . l:stash[0]
-    call promiscuous#helpers#log('Stash pop: ' . l:stash[0])
+    call promiscuous#helpers#log('Stash pop')
   endif
 endfunction
