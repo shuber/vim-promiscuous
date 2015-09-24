@@ -9,7 +9,7 @@ function! promiscuous#helpers#exec(cmd, ...)
     let s:command = '!' . a:cmd
   endif
 
-  call promiscuous#helpers#log(a:cmd)
+  call promiscuous#helpers#log(s:command)
   exec s:command
 endfunction
 
