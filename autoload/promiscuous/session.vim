@@ -7,12 +7,10 @@ function! promiscuous#session#load()
   let l:session_file = promiscuous#session#file()
 
   if (filereadable(l:session_file))
-    silent! exec 'source ' . l:session_file
+    call promiscuous#session#exec('source ' . l:session_file, 0)
   else
     call promiscuous#session#save()
   endif
-
-  call promiscuous#helpers#log('Load: ' . l:session_file)
 endfunction
 
 function! promiscuous#session#name()
@@ -26,6 +24,5 @@ function! promiscuous#session#save()
   let l:session_file = promiscuous#session#file()
   call promiscuous#helpers#mkdir(g:promiscuous_dir)
   call promiscuous#undo#save()
-  silent! exec 'mksession! ' . l:session_file
-  call promiscuous#helpers#log('Save: ' . l:session_file)
+  call promiscuous#session#exec('mksession! ' . l:session_file, 0)
 endfunction

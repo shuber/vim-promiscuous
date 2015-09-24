@@ -1,6 +1,5 @@
 function! promiscuous#branch#clean()
-  silent! exec 'bufdo bd'
-  call promiscuous#helpers#log('Clean')
+  call promiscuous#helpers#exec('bufdo bd', 0)
 endfunction
 
 function! promiscuous#branch#search()

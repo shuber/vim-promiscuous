@@ -5,13 +5,11 @@ function! promiscuous#git#checkout(unsanitized_branch)
   let l:checkout_new = l:checkout . '-b ' . l:branch
   let l:checkout_command = l:checkout_old . ' || ' . l:checkout_new
   call promiscuous#helpers#exec(l:checkout_command)
-  call promiscuous#helpers#log('Checkout: ' . l:branch)
 endfunction
 
 function! promiscuous#git#commit()
   let l:commit = 'git commit -am ' . shellescape(g:promiscuous_prefix)
   call promiscuous#helpers#exec('git add . && ' . l:commit)
-  call promiscuous#helpers#log('Commit')
 endfunction
 
 function! promiscuous#git#commit_pop()
@@ -19,14 +17,12 @@ function! promiscuous#git#commit_pop()
 
   if l:commit == g:promiscuous_prefix
     call promiscuous#helpers#exec('git reset --soft HEAD~1 && git reset')
-    call promiscuous#helpers#log('Commit pop')
   endif
 endfunction
 
 function! promiscuous#git#stash()
   let l:name = promiscuous#session#name()
   call promiscuous#helpers#exec('git stash save ' . l:name . ' && git stash apply')
-  call promiscuous#helpers#log('Stash')
 endfunction
 
 function! promiscuous#git#stash_pop()
@@ -35,6 +31,5 @@ function! promiscuous#git#stash_pop()
 
   if type(l:stash) == type([]) && len(l:stash) > 0
     call promiscuous#helpers#exec('git reset --hard && git stash pop --index ' . l:stash[0])
-    call promiscuous#helpers#log('Stash pop')
   endif
 endfunction
