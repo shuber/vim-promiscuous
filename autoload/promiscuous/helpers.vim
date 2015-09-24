@@ -10,7 +10,7 @@ function! promiscuous#helpers#exec(cmd, ...)
   endif
 
   call promiscuous#helpers#log(a:cmd)
-  silent! exec s:command
+  exec s:command
 endfunction
 
 function! promiscuous#helpers#log(message)
