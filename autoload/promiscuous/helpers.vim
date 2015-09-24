@@ -3,7 +3,7 @@ function! promiscuous#helpers#dasherize(path)
 endfunction
 
 function! promiscuous#helpers#exec(cmd, ...)
-  if a:0 > 1
+  if a:0 > 0
     let s:command = a:cmd
   else
     let s:command = '!' . a:cmd
