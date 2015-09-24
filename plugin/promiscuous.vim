@@ -2,12 +2,12 @@ set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
 set undolevels=1000
 set undoreload=10000
 
-if !exists("g:promiscuous_dir")
+if !exists('g:promiscuous_dir')
   " The directory to store all sessions and undo history
   let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 endif
 
-if !exists("g:promiscuous_prefix")
+if !exists('g:promiscuous_prefix')
   " The prefix prepended to all commit, stash, and log messages
   let g:promiscuous_prefix = '[Promiscuous]'
 endif

@@ -18,7 +18,7 @@ function! promiscuous#helpers#log(message)
 endfunction
 
 function! promiscuous#helpers#mkdir(dir)
-  if (filewritable(a:dir) != 2)
+  if filewritable(a:dir) != 2
     call promiscuous#helpers#exec('mkdir -p ' . a:dir)
   endif
 endfunction

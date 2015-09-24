@@ -6,7 +6,7 @@ endfunction
 function! promiscuous#session#load()
   let l:session_file = promiscuous#session#file()
 
-  if (filereadable(l:session_file))
+  if filereadable(l:session_file)
     call promiscuous#helpers#exec('source ' . l:session_file, 0)
   else
     call promiscuous#session#save()
