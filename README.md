@@ -15,6 +15,20 @@ Load `shuber/vim-promiscuous` using your favorite plugin manager e.g. [Vundle](h
 ```
 
 
+## How does it work?
+
+```vim
+call promiscuous#git#stash()
+call promiscuous#git#commit()
+call promiscuous#session#save()
+call promiscuous#branch#clean()
+call promiscuous#git#checkout(l:branch)
+call promiscuous#session#load()
+call promiscuous#git#commit_pop()
+call promiscuous#git#stash_pop()
+```
+
+
 ## Configuration
 
 These are the defaults. Feel free to override them.
