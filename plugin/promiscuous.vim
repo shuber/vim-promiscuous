@@ -36,6 +36,7 @@ function! Promiscuous(...)
     call promiscuous#session#load()
     call promiscuous#git#commit_pop()
     call promiscuous#git#stash_pop()
+    call promiscuous#helpers#log('Checked out ' . l:branch)
 
     redraw!
   else
