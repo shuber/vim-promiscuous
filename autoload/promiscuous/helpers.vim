@@ -2,14 +2,17 @@ function! promiscuous#helpers#dasherize(path)
   return substitute(a:path, '\W', '_', 'g')
 endfunction
 
-function! promiscuous#helpers#exec(cmd, ...)
+function! promiscuous#helpers#exec(command, ...)
   if a:0 > 0
-    let s:command = a:cmd
+    let s:verbose = a:1
   else
-    let s:command = '!' . a:cmd
+    let s:verbose = g:promiscuous_verbose
   endif
 
-  call promiscuous#helpers#log(s:command)
+  if s:verbose
+    call promiscuous#helpers#log(a:command)
+  endif
+
   exec s:command
 endfunction
 
@@ -19,6 +22,6 @@ endfunction
 
 function! promiscuous#helpers#mkdir(dir)
   if filewritable(a:dir) != 2
-    call promiscuous#helpers#exec('mkdir -p ' . a:dir)
+    call promiscuous#helpers#exec('!mkdir -p ' . a:dir)
   endif
 endfunction

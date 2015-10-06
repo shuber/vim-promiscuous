@@ -12,6 +12,11 @@ if !exists('g:promiscuous_prefix')
   let g:promiscuous_prefix = '[Promiscuous]'
 endif
 
+if !exists('g:promiscuous_verbose')
+  " Log all executed commands with echom
+  let g:promiscuous_verbose = 0
+endif
+
 command! -nargs=? Promiscuous :call Promiscuous(<f-args>)
 
 function! Promiscuous(...)

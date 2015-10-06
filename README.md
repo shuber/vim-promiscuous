@@ -39,6 +39,9 @@ let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 
 " The prefix prepended to all commit, stash, and log messages
 let g:promiscuous_prefix = '[Promiscuous]'
+
+" Log all executed commands with echom
+let g:promiscuous_verbose = 0
 ```
 
 ```vim
