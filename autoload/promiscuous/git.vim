@@ -22,9 +22,9 @@ endfunction
 
 function! promiscuous#git#stash()
   let l:name = promiscuous#session#name()
-  let l:dirty = '(git diff --quiet || git diff --cached --quiet)'
-  let l:stash = 'git stash save ' . l:name . ' && git stash apply'
-  call promiscuous#helpers#exec('!' . l:dirty . ' && ' . l:stash)
+  let l:clean = '(git diff --quiet && git diff --cached --quiet)'
+  let l:stash = '(git stash save ' . l:name . ' && git stash apply)'
+  call promiscuous#helpers#exec('!' . l:clean . ' || ' . l:stash)
 endfunction
 
 function! promiscuous#git#stash_pop()
