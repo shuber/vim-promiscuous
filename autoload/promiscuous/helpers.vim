@@ -1,5 +1,5 @@
 function! promiscuous#helpers#clear()
-  silent exec '!clear'
+  call promiscuous#helpers#exec('!clear')
 endfunction
 
 function! promiscuous#helpers#dasherize(path)
