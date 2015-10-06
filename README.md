@@ -28,6 +28,26 @@ call promiscuous#git#commit_pop()
 call promiscuous#git#stash_pop()
 ```
 
+The output below occurred when switching from `master` to `something-new` then back to `master`.
+
+```
+[Promiscuous] !clear
+[Promiscuous] !git stash save _dotfiles_master && git stash apply
+[Promiscuous] !git add . && git commit -am '[Promiscuous]'
+[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/_dotfiles_master.vim
+[Promiscuous] bufdo bd
+[Promiscuous] !git checkout something-new || git checkout -b something-new
+[Promiscuous] source /Users/Sean/.vim/promiscuous/_dotfiles_something_new.vim
+
+[Promiscuous] !clear
+[Promiscuous] !git stash save _dotfiles_something_new && git stash apply
+[Promiscuous] !git add . && git commit -am '[Promiscuous]'
+[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/_dotfiles_something_new.vim
+[Promiscuous] bufdo bd
+[Promiscuous] !git checkout master || git checkout -b master
+[Promiscuous] source /Users/Sean/.vim/promiscuous/_dotfiles_master.vim
+```
+
 
 ## Configuration
 
