@@ -8,6 +8,7 @@ function! promiscuous#session#load()
 
   if filereadable(l:session_file)
     call promiscuous#helpers#exec('source ' . l:session_file, 1)
+    call promiscuous#undo#save()
   else
     call promiscuous#session#save()
   endif
