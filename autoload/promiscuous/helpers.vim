@@ -13,7 +13,7 @@ function! promiscuous#helpers#exec(command, ...)
     call promiscuous#helpers#log(a:command)
   endif
 
-  exec s:command
+  exec a:command
 endfunction
 
 function! promiscuous#helpers#log(message)
