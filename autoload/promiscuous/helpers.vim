@@ -1,3 +1,7 @@
+function! promiscuous#helpers#clear()
+  silent exec '!clear'
+endfunction
+
 function! promiscuous#helpers#dasherize(path)
   return substitute(a:path, '\W', '_', 'g')
 endfunction

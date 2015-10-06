@@ -27,6 +27,7 @@ function! Promiscuous(...)
       let l:branch = a:1
     endif
 
+    call promiscuous#helpers#clear()
     call promiscuous#git#stash()
     call promiscuous#git#commit()
     call promiscuous#session#save()
