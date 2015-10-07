@@ -7,12 +7,27 @@ Powerful **context switching** using git and vim sessions.
 
 Load `shuber/vim-promiscuous` using your favorite plugin manager e.g. [Vundle](https://github.com/VundleVim/Vundle.vim)
 
+It currently depends on `:FZF`, but this dependency will be optional in the future.
+
 
 ## Usage
 
 ```vim
 :Promiscuous [branch]
 ```
+
+
+## What does it do?
+
+It basically takes a snapshot of the following:
+
+* All of your vim tabs, buffers, splits, and folds along with their sizes and positions
+* The location of your cursor for each buffer
+* The actively selected tab/buffer
+* Your undo history (each branch's undo history is saved separately)
+* Your git stage with all tracked/untracked files and staged/unstaged hunks
+
+When you switch to different branches using `:Promiscuous`, it takes of snapshot of the current branch and working directory, then checks out the new branch, and loads its corresponding snapshot if one exists. If no snapshot exists, you are presented with a "fresh" vim instance that only has one tab and an empty buffer.
 
 
 ## How does it work?
