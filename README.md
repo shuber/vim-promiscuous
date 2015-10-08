@@ -3,6 +3,23 @@
 Powerful **context switching** using git and vim sessions.
 
 
+## What does it do?
+
+It basically takes a snapshot of the following:
+
+* All of your vim tabs, buffers, splits, and folds along with their sizes and positions
+* The location of your cursor for each buffer
+* The actively selected tab/buffer
+* Your undo history (each branch's undo history is saved separately)
+* Your git stage with all tracked/untracked files and staged/unstaged hunks
+
+When you switch to different branches using `:Promiscuous your-branch-name`, it takes of snapshot of the current branch and working directory, then checks out the new branch, and loads its corresponding snapshot if one exists.
+
+If no snapshot exists, you are presented with a "fresh" vim instance that only has one tab and an empty buffer.
+
+When `:Promiscuous` is called with no arguments, an `:FZF` fuzzy finder window is presented with a list of existing branches. From there we can either select an existing branch, or type out a new branch to checkout.
+
+
 ## Installation
 
 Load `shuber/vim-promiscuous` using your favorite plugin manager e.g. [Vundle](https://github.com/VundleVim/Vundle.vim)
@@ -16,18 +33,39 @@ It currently depends on `:FZF`, but this dependency will be optional in the futu
 :Promiscuous [branch]
 ```
 
+It's recommended to make a custom key binding for this. I've been using the following mapping:
 
-## What does it do?
+```vim
+nmap <leader>gb :Promiscuous<cr>
+```
 
-It basically takes a snapshot of the following:
+I also use an additional mapping to checkout the previous branch (usually `master`):
 
-* All of your vim tabs, buffers, splits, and folds along with their sizes and positions
-* The location of your cursor for each buffer
-* The actively selected tab/buffer
-* Your undo history (each branch's undo history is saved separately)
-* Your git stage with all tracked/untracked files and staged/unstaged hunks
+```vim
+nmap <leader>gg :Promiscuous -<cr>
+```
 
-When you switch to different branches using `:Promiscuous`, it takes of snapshot of the current branch and working directory, then checks out the new branch, and loads its corresponding snapshot if one exists. If no snapshot exists, you are presented with a "fresh" vim instance that only has one tab and an empty buffer.
+
+## Configuration
+
+These are the defaults. Feel free to override them.
+
+```vim
+" The directory to store all sessions and undo history
+let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
+
+" The prefix prepended to all commit, stash, and log messages
+let g:promiscuous_prefix = '[Promiscuous]'
+
+" Log all executed commands with echom
+let g:promiscuous_verbose = 0
+```
+
+```vim
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
+set undolevels=1000
+set undoreload=10000
+```
 
 
 ## How does it work?
@@ -61,28 +99,6 @@ The output below occurred when switching from `master` to `something-new` then b
 [Promiscuous] bufdo bd
 [Promiscuous] !git checkout master || git checkout -b master
 [Promiscuous] source /Users/Sean/.vim/promiscuous/_dotfiles_master.vim
-```
-
-
-## Configuration
-
-These are the defaults. Feel free to override them.
-
-```vim
-" The directory to store all sessions and undo history
-let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
-
-" The prefix prepended to all commit, stash, and log messages
-let g:promiscuous_prefix = '[Promiscuous]'
-
-" Log all executed commands with echom
-let g:promiscuous_verbose = 0
-```
-
-```vim
-set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
-set undolevels=1000
-set undoreload=10000
 ```
 
 
