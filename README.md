@@ -13,7 +13,7 @@ It basically takes a snapshot of the following:
 * Your undo history (each branch's undo history is saved separately)
 * Your git stage with all tracked/untracked files and staged/unstaged hunks
 
-When you switch to different branches using `:Promiscuous your-branch-name`, it takes of snapshot of the current branch and working directory, then checks out the new branch, and loads its corresponding snapshot if one exists.
+When you switch to different branches using `:Promiscuous your-branch-name`, it takes a snapshot of the current branch and working directory, then checks out the new branch, and loads its corresponding snapshot if one exists.
 
 If no snapshot exists, you are presented with a "fresh" vim instance that only has one tab and an empty buffer.
 
