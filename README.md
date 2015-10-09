@@ -90,13 +90,13 @@ The output below occurred when switching from `master` to `something-new` then b
 [Promiscuous] mksession! /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_master.vim
 [Promiscuous] bufdo bd
 [Promiscuous] !git checkout - || git checkout -b -
-[Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_sh_testing.vim
-[Promiscuous] Checkout sh/testing
+[Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_something_new.vim
+[Promiscuous] Checkout something-new
 
 [Promiscuous] !clear
-[Promiscuous] !(git diff --quiet && git diff --cached --quiet) || (git stash save Code_vim_promiscuous_sh_testing && git stash apply)
+[Promiscuous] !(git diff --quiet && git diff --cached --quiet) || (git stash save Code_vim_promiscuous_something_new && git stash apply)
 [Promiscuous] !git add . && git commit -am '[Promiscuous]'
-[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_sh_testing.vim
+[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_something_new.vim
 [Promiscuous] bufdo bd
 [Promiscuous] !git checkout - || git checkout -b -
 [Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_master.vim
