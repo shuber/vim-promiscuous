@@ -74,7 +74,7 @@ set undoreload=10000
 call promiscuous#git#stash()
 call promiscuous#git#commit()
 call promiscuous#session#save()
-call promiscuous#branch#clean()
+call promiscuous#session#clean()
 call promiscuous#git#checkout(l:branch)
 call promiscuous#session#load()
 call promiscuous#git#commit_pop()
@@ -85,20 +85,22 @@ The output below occurred when switching from `master` to `something-new` then b
 
 ```
 [Promiscuous] !clear
-[Promiscuous] !git stash save _dotfiles_master && git stash apply
+[Promiscuous] !(git diff --quiet && git diff --cached --quiet) || (git stash save Code_vim_promiscuous_master && git stash apply)
 [Promiscuous] !git add . && git commit -am '[Promiscuous]'
-[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/_dotfiles_master.vim
+[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_master.vim
 [Promiscuous] bufdo bd
-[Promiscuous] !git checkout something-new || git checkout -b something-new
-[Promiscuous] source /Users/Sean/.vim/promiscuous/_dotfiles_something_new.vim
+[Promiscuous] !git checkout - || git checkout -b -
+[Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_sh_testing.vim
+[Promiscuous] Checkout sh/testing
 
 [Promiscuous] !clear
-[Promiscuous] !git stash save _dotfiles_something_new && git stash apply
+[Promiscuous] !(git diff --quiet && git diff --cached --quiet) || (git stash save Code_vim_promiscuous_sh_testing && git stash apply)
 [Promiscuous] !git add . && git commit -am '[Promiscuous]'
-[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/_dotfiles_something_new.vim
+[Promiscuous] mksession! /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_sh_testing.vim
 [Promiscuous] bufdo bd
-[Promiscuous] !git checkout master || git checkout -b master
-[Promiscuous] source /Users/Sean/.vim/promiscuous/_dotfiles_master.vim
+[Promiscuous] !git checkout - || git checkout -b -
+[Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_master.vim
+[Promiscuous] Checkout master
 ```
 
 
