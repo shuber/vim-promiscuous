@@ -40,7 +40,7 @@ function! Promiscuous(...)
     redraw!
 
     let l:checkout = promiscuous#git#branch()
-    call promiscuous#helpers#log('Checkout ' . l:checkout, 1)
+    call promiscuous#helpers#log('Checkout ' . l:checkout)
   else
     call promiscuous#autocomplete#branches()
   endif
