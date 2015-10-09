@@ -1,3 +1,7 @@
+function! promiscuous#session#clean()
+  call promiscuous#helpers#exec('bufdo bd')
+endfunction
+
 function! promiscuous#session#file()
   let l:session_name = promiscuous#session#name()
   return g:promiscuous_dir . '/' . l:session_name . '.vim'
