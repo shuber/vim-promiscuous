@@ -1,3 +1,7 @@
+function! promiscuous#git#branch()
+  return systemlist('git symbolic-ref --short HEAD')[0]
+endfunction
+
 function! promiscuous#git#checkout(unsanitized_branch)
   let l:branch = substitute(a:unsanitized_branch, '^\s*\(.\{-}\)\s*$', '\1', '')
   let l:checkout = 'git checkout '

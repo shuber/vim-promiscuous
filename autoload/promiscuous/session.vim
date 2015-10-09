@@ -19,7 +19,7 @@ function! promiscuous#session#load()
 endfunction
 
 function! promiscuous#session#name()
-  let l:git_branch = systemlist('git symbolic-ref --short HEAD')[0]
+  let l:git_branch = promiscuous#git#branch()
   let l:session_name = getcwd() . '/' . l:git_branch
   let l:stripped = substitute(l:session_name, $HOME . '/', '', '')
   return promiscuous#helpers#dasherize(l:stripped)

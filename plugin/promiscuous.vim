@@ -36,11 +36,13 @@ function! Promiscuous(...)
     call promiscuous#session#load()
     call promiscuous#git#commit_pop()
     call promiscuous#git#stash_pop()
-    call promiscuous#helpers#log('Checked out ' . l:branch)
 
     redraw!
+
+    let l:checkout = promiscuous#git#branch()
+    call promiscuous#helpers#log('Checkout ' . l:checkout, 1)
   else
-    call promiscuous#branch#search()
+    call promiscuous#autocomplete#branches()
   endif
 endfunction
 
