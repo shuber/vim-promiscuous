@@ -36,6 +36,7 @@ function! Promiscuous(...)
     call promiscuous#session#load()
     call promiscuous#git#commit_pop()
     call promiscuous#git#stash_pop()
+    call promiscuous#tmux#refresh()
 
     let l:branch = promiscuous#git#branch()
     call promiscuous#helpers#log('Checkout ' . l:branch)

@@ -19,6 +19,8 @@ If no snapshot exists, you are presented with a "fresh" vim instance that only h
 
 When `:Promiscuous` is called with no arguments, an `:FZF` fuzzy finder window is presented with a list of existing branches. From there we can either select an existing branch, or type out a new branch to checkout.
 
+If you're using [tmux](https://tmux.github.io/) then your status line will automatically refresh when `:Promiscuous` checks out a branch. This is very convenient when you display [git information in your status line](https://github.com/shuber/tmux-git).
+
 
 ## Installation
 
@@ -79,6 +81,7 @@ call promiscuous#git#checkout(l:branch)
 call promiscuous#session#load()
 call promiscuous#git#commit_pop()
 call promiscuous#git#stash_pop()
+call promiscuous#tmux#refresh()
 ```
 
 The output below occurred when switching from `master` to `something-new` then back to `master`.
