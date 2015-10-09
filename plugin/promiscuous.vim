@@ -45,5 +45,3 @@ function! Promiscuous(...)
     call promiscuous#autocomplete#branches()
   endif
 endfunction
-
-silent! call promiscuous#session#save()
