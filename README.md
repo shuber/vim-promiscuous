@@ -1,6 +1,6 @@
 # [![Sean Huber](https://cloud.githubusercontent.com/assets/2419/6550752/832d9a64-c5ea-11e4-9717-6f9aa6e023b5.png)](https://github.com/shuber) vim-promiscuous
 
-Powerful **context switching** using git and vim sessions.
+Instant **context switching** using git and vim sessions.
 
 
 ## What does it do?
