@@ -7,9 +7,19 @@ if !exists('g:promiscuous_dir')
   let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 endif
 
+if !exists('g:promiscuous_load')
+  " The callback used to load a session
+  let g:promiscuous_load = 'promiscuous#session#load'
+endif
+
 if !exists('g:promiscuous_prefix')
   " The prefix prepended to all commit, stash, and log messages
   let g:promiscuous_prefix = '[Promiscuous]'
+endif
+
+if !exists('g:promiscuous_save')
+  " The callback used to save a session
+  let g:promiscuous_save = 'promiscuous#session#save'
 endif
 
 if !exists('g:promiscuous_verbose')
@@ -30,10 +40,10 @@ function! Promiscuous(...)
     call promiscuous#helpers#clear()
     call promiscuous#git#stash()
     call promiscuous#git#commit()
-    call promiscuous#session#save()
+    call call(g:promiscuous_save, [], {})
     call promiscuous#session#clean()
     call promiscuous#git#checkout(l:branch)
-    call promiscuous#session#load()
+    call call(g:promiscuous_load, [], {})
     call promiscuous#git#commit_pop()
     call promiscuous#git#stash_pop()
     call promiscuous#tmux#refresh()

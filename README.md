@@ -61,8 +61,14 @@ These are the defaults. Feel free to override them.
 " The directory to store all sessions and undo history
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 
+" The callback used to load a session
+let g:promiscuous_load = 'promiscuous#session#load()'
+
 " The prefix prepended to all commit, stash, and log messages
 let g:promiscuous_prefix = '[Promiscuous]'
+
+" The callback used to save a session
+let g:promiscuous_save = 'promiscuous#session#save()'
 
 " Log all executed commands with echom
 let g:promiscuous_verbose = 0
