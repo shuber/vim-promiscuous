@@ -7,7 +7,7 @@ function! promiscuous#session#file()
   return g:promiscuous_dir . '/' . l:session_name . '.vim'
 endfunction
 
-function! promiscuous#session#load()
+function! promiscuous#session#load(branch)
   let l:session_file = promiscuous#session#file()
 
   if filereadable(l:session_file)
@@ -25,7 +25,7 @@ function! promiscuous#session#name()
   return promiscuous#helpers#dasherize(l:stripped)
 endfunction
 
-function! promiscuous#session#save()
+function! promiscuous#session#save(branch)
   let l:session_file = promiscuous#session#file()
   call promiscuous#helpers#mkdir(g:promiscuous_dir)
   call promiscuous#undo#save()

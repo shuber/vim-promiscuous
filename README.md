@@ -61,8 +61,14 @@ These are the defaults. Feel free to override them.
 " The directory to store all sessions and undo history
 let g:promiscuous_dir = $HOME . '/.vim/promiscuous'
 
+" The callback used to load a session (receives branch name)
+let g:promiscuous_load = 'promiscuous#session#load'
+
 " The prefix prepended to all commit, stash, and log messages
 let g:promiscuous_prefix = '[Promiscuous]'
+
+" The callback used to save a session (receives branch name)
+let g:promiscuous_save = 'promiscuous#session#save'
 
 " Log all executed commands with echom
 let g:promiscuous_verbose = 0
@@ -78,12 +84,19 @@ set undoreload=10000
 ## How does it work?
 
 ```vim
+call promiscuous#helpers#clear()
 call promiscuous#git#stash()
 call promiscuous#git#commit()
-call promiscuous#session#save()
+
+let l:branch_was = promiscuous#git#branch()
+call call(g:promiscuous_save, [l:branch_was], {})
+
 call promiscuous#session#clean()
 call promiscuous#git#checkout(l:branch)
-call promiscuous#session#load()
+
+let l:branch = promiscuous#git#branch()
+call call(g:promiscuous_load, [l:branch], {})
+
 call promiscuous#git#commit_pop()
 call promiscuous#git#stash_pop()
 call promiscuous#tmux#refresh()
