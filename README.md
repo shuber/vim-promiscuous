@@ -21,6 +21,11 @@ When `:Promiscuous` is called with no arguments, an `:FZF` fuzzy finder window i
 
 If you're using [tmux](https://tmux.github.io/) then your status line will automatically refresh when `:Promiscuous` checks out a branch. This is very convenient when you display [git information in your status line](https://github.com/shuber/tmux-git).
 
+Similar projects:
+
+* http://www.eclipse.org/mylyn/
+* https://github.com/szw/vim-ctrlspace
+
 
 ## Installation
 
