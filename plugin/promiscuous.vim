@@ -40,16 +40,21 @@ function! Promiscuous(...)
     call promiscuous#helpers#clear()
     call promiscuous#git#stash()
     call promiscuous#git#commit()
-    call call(g:promiscuous_save, [], {})
+
+    let l:branch_was = promiscuous#git#branch()
+    call call(g:promiscuous_save, [l:branch_was], {})
+
     call promiscuous#session#clean()
     call promiscuous#git#checkout(l:branch)
-    call call(g:promiscuous_load, [], {})
+
+    let l:branch = promiscuous#git#branch()
+    call call(g:promiscuous_load, [l:branch], {})
+
     call promiscuous#git#commit_pop()
     call promiscuous#git#stash_pop()
     call promiscuous#tmux#refresh()
 
-    let l:branch = promiscuous#git#branch()
-    call promiscuous#helpers#log('Checkout ' . l:branch)
+    call promiscuous#helpers#log(l:branch_was . ' to ' . l:branch)
 
     redraw!
   else
