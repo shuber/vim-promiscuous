@@ -14,7 +14,7 @@ function! promiscuous#session#load(branch)
     call promiscuous#helpers#exec('source ' . l:session_file, 1)
     call promiscuous#undo#save()
   else
-    call promiscuous#session#save()
+    call promiscuous#session#save(a:branch)
   endif
 endfunction
 
