@@ -2,11 +2,24 @@ function! promiscuous#git#branch()
   return systemlist('git symbolic-ref --short HEAD')[0]
 endfunction
 
+function! promiscuous#git#basebranchcurrentbranch(new_branch)
+  return ''
+endfunction
+
+function! promiscuous#git#basebranchoriginmaster(new_branch)
+  return 'origin/master'
+endfunction
+
+function! promiscuous#git#basebranchlatestoriginmaster(new_branch)
+  call promiscuous#helpers#exec('!git fetch origin')
+  return 'origin/master'
+endfunction
+
 function! promiscuous#git#checkout(unsanitized_branch)
   let l:branch = substitute(a:unsanitized_branch, '^\s*\(.\{-}\)\s*$', '\1', '')
   let l:checkout = 'git checkout '
   let l:checkout_old = l:checkout . l:branch
-  let l:checkout_new = l:checkout . '-b ' . l:branch
+  let l:checkout_new = l:checkout . '-b ' . l:branch . ' ' . call(g:promiscuous_base_branch, [l:branch], {})
   let l:checkout_command = '!' . l:checkout_old . ' || ' . l:checkout_new
   call promiscuous#helpers#exec(l:checkout_command)
 endfunction

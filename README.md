@@ -21,6 +21,12 @@ When `:Promiscuous` is called with no arguments, an `:FZF` fuzzy finder window i
 
 If you're using [tmux](https://tmux.github.io/) then your status line will automatically refresh when `:Promiscuous` checks out a branch. This is very convenient when you display [git information in your status line](https://github.com/shuber/tmux-git).
 
+By default, if calling `:Promiscuous new-branch-name` with a not
+existing branch, Promiscuous will create that branch as if you executed
+`git checkout new-branch-name`. An option allows you to execute instead
+`git checkout -b new-branch-name origin/master` and even
+`git fetch; git checkout -b new-branch-name origin/master`.
+
 Similar projects:
 
 * http://www.eclipse.org/mylyn/
@@ -72,6 +78,11 @@ let g:promiscuous_save = 'promiscuous#session#save'
 
 " Log all executed commands with echom
 let g:promiscuous_verbose = 0
+
+" The callback used to determine which base to create a new branch on
+let g:promiscuous_base_branch = 'promiscuous#git#basebranchcurrentbranch'
+" let g:promiscuous_base_branch = 'promiscuous#git#basebranchoriginmaster'
+" let g:promiscuous_base_branch = 'promiscuous#git#basebranchlatestoriginmaster'
 ```
 
 ```vim
@@ -123,6 +134,7 @@ The output below occurred when switching from `master` to `something-new` then b
 [Promiscuous] source /Users/Sean/.vim/promiscuous/Code_vim_promiscuous_master.vim
 [Promiscuous] Checkout master
 ```
+
 
 
 ## Contributing
