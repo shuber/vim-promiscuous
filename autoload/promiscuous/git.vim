@@ -12,7 +12,7 @@ function! promiscuous#git#checkout(unsanitized_branch)
 endfunction
 
 function! promiscuous#git#commit()
-  let l:commit = 'git commit -am ' . shellescape(g:promiscuous_prefix)
+  let l:commit = 'git commit -anm ' . shellescape(g:promiscuous_prefix)
   call promiscuous#helpers#exec('!git add . && ' . l:commit)
 endfunction
 
