@@ -32,7 +32,11 @@ command! -nargs=? Promiscuous :call Promiscuous(<f-args>)
 function! Promiscuous(...)
   if a:0 > 0
     if type(a:1) == type([])
-      let l:branch = a:1[-1]
+      if len(a:1) == 0  " Handles pressing ESC in fzf
+        return 1
+      else
+        let l:branch = a:1[-1]
+      end
     else
       let l:branch = a:1
     endif
